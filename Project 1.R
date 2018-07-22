@@ -33,7 +33,24 @@ clean_company <-
   product_code == "q" ~ "Tablet"))
 
 #
+clean_company <- 
+  clean_company %>% 
+  unite("full_address", address, city,country, sep = ",", remove = FALSE) 
+
+#
+clean_company <- 
+  clean_company %>% 
+  mutate(company_philips = ifelse(company %in% "philips", yes = 1, no = 0),
+                                              company_akzo = ifelse(company %in% "akzo", yes = 1, no = 0),
+                                              company_van_houten = ifelse(company %in% "van houten", yes = 1, no = 0),
+                                              company_unilever = ifelse(company %in% "unilever", yes = 1, no = 0),
+                                              
+                                              product_smartphone = ifelse(product_category %in% "Smartphone", yes = 1, no = 0),
+                                              product_tv = ifelse(product_category %in% "Tv", yes = 1, no = 0),
+                                              product_laptop = ifelse(product_category %in% "Laptop", yes = 1, no = 0),
+                                              product_tablet = ifelse(product_category %in% "Tablet", yes = 1, no = 0)) 
 
 
-clean_company 
+str (clean_company)
 
+write.csv(clean_company, "refine_original.csv")
