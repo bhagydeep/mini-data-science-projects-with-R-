@@ -17,13 +17,12 @@ clean_company <-
   mutate(company = sub("van.*", "van houten", x=company)) %>%
   mutate(company = sub("unilver", "unilever", x=company))
 
-#
+# Seprate product code and product number 
 clean_company <- 
   clean_company %>%
   separate ('Product code / number', c("product_code", "product_number"), sep = "-")
   
-
-#
+# adding product category
 clean_company <-
   clean_company %>%
   mutate(product_category = case_when (
@@ -32,12 +31,12 @@ clean_company <-
   product_code == "x" ~ "Laptop",
   product_code == "q" ~ "Tablet"))
 
-#
+# Full address grocoding
 clean_company <- 
   clean_company %>% 
   unite("full_address", address, city,country, sep = ",", remove = FALSE) 
 
-#
+# dummy varibles for company category and product category
 clean_company <- 
   clean_company %>% 
   mutate(company_philips = ifelse(company %in% "philips", yes = 1, no = 0),
