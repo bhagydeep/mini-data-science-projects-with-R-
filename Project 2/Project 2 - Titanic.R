@@ -25,4 +25,9 @@ titanic_orginal <-
 titanic_orginal <-
   titanic_orginal %>%
   mutate(has_cabin_number = ifelse(!is.na(cabin), 1, 0 ))
-         
+
+select(titanic_orginal, has_cabin_number)
+
+#
+write_csv(titanic_orginal, "Final Output - Titanic.csv")
+
