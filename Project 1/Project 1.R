@@ -12,7 +12,8 @@ select(refine, company)
 clean_company <- 
   refine %>% 
   mutate(company = tolower(company)) %>% 
-  mutate(company = sub("phillips|phllips|phillps|fillips|phlips", "philips", x=company)) %>%
+  mutate(company = 
+           sub("phillips|phllips|phillps|fillips|phlips", "philips", x=company)) %>%
   mutate(company = sub("akz0|ak zo", "akzo", x=company)) %>%
   mutate(company = sub("van.*", "van houten", x=company)) %>%
   mutate(company = sub("unilver", "unilever", x=company))
@@ -40,15 +41,13 @@ clean_company <-
 clean_company <- 
   clean_company %>% 
   mutate(company_philips = ifelse(company %in% "philips", yes = 1, no = 0),
-                                              company_akzo = ifelse(company %in% "akzo", yes = 1, no = 0),
-                                              company_van_houten = ifelse(company %in% "van houten", yes = 1, no = 0),
-                                              company_unilever = ifelse(company %in% "unilever", yes = 1, no = 0),
-                                              
-                                              product_smartphone = ifelse(product_category %in% "Smartphone", yes = 1, no = 0),
-                                              product_tv = ifelse(product_category %in% "Tv", yes = 1, no = 0),
-                                              product_laptop = ifelse(product_category %in% "Laptop", yes = 1, no = 0),
-                                              product_tablet = ifelse(product_category %in% "Tablet", yes = 1, no = 0)) 
-
+        company_akzo = ifelse(company %in% "akzo", yes = 1, no = 0),
+        company_van_houten = ifelse(company %in% "van houten", yes = 1, no = 0),
+        company_unilever = ifelse(company %in% "unilever", yes = 1, no = 0),
+        product_smartphone = ifelse(product_category %in% "Smartphone", yes = 1, no = 0),
+        product_tv = ifelse(product_category %in% "Tv", yes = 1, no = 0),
+        product_laptop = ifelse(product_category %in% "Laptop", yes = 1, no = 0),
+        product_tablet = ifelse(product_category %in% "Tablet", yes = 1, no = 0)) 
 
 str (clean_company)
 
